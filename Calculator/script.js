@@ -54,6 +54,7 @@ for(var key of keys)
             operand1=result;
             operand2="";
             res.innerHTML= result;
+            flag=0;
         }
     });
 }
