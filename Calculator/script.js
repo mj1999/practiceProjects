@@ -13,14 +13,14 @@ for(var key of keys)
         // console.log(this.className);
         if(this.className=="keys")
         {
-            res.innerHTML+=this.innerHTML;
+            res2.innerHTML+=this.innerHTML;
         }
         else{
             if(this.className=="keys operator lastLine" || this.className=="keys operator")
             {
-                operand1 = res.innerHTML;
+                operand1 = res2.innerHTML;
                 operator=this.innerHTML;
-                res.innerHTML="";
+                res2.innerHTML="";
             }
             else if(this.getAttribute("data-value")=="clear")
             {
@@ -32,11 +32,11 @@ for(var key of keys)
             }
             else if(this.getAttribute("data-value")=="negate")
             {
-                res.innerHTML= '-' + res.innerHTML;
+                res2.innerHTML= '-' + res2.innerHTML;
             }
             else if(this.getAttribute("data-value")=="=")
             {
-                operand2=res.innerHTML;
+                operand2=res2.innerHTML;
                 res.innerHTML = operand1 + " "+ operator+" " + operand2;
                 res2.innerHTML =  eval(operand1 + operator + operand2);
             }
