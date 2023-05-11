@@ -27,9 +27,14 @@
 .lastLine{
 	background-color: indianred;
 }
-#res-container{
+#res-container1{
 	width: 100%;
-	height: 22%;
+	height: 10%;
 	font-size: larger;
-
+}
+#res-container2{
+	width: 100%;
+	height: 15%;
+	font-size: 4rem;
+	text-align: end;
 }

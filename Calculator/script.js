@@ -1,8 +1,9 @@
 var keys = document.getElementsByClassName("keys");
-var res = document.getElementById('res-container');
+var res = document.getElementById('res-container1');
+var res2 = document.getElementById('res-container2');
 var operand1 = "";
 var operand2 = "";
-var operator;
+var operator="";
 var flag=0;
 
 for(var key of keys)
@@ -10,51 +11,35 @@ for(var key of keys)
     // console.log(key.className);
     key.addEventListener('click',function(){
         // console.log(this.className);
-        if(this.className=="keys clear")
+        if(this.className=="keys")
         {
-            res.innerHTML="";
-            operand1="";
-            operand2="";
-            flag=0;
+            res.innerHTML+=this.innerHTML;
         }
-        else if(flag==0 && this.className=="keys")
-        {
-            operand1 += this.innerHTML;
-            res.innerHTML=operand1;
-        }
-        else if(this.getAttribute("data-value")=="negate"){
-            console.log("negate");
-            if(flag==0)
+        else{
+            if(this.className=="keys operator lastLine" || this.className=="keys operator")
             {
-                operand1 = "-"+operand1;
-                res.innerHTML=operand1;
+                operand1 = res.innerHTML;
+                operator=this.innerHTML;
+                res.innerHTML="";
             }
-            else
+            else if(this.getAttribute("data-value")=="clear")
             {
-                operand2 ="-"+operand2;
-                res.innerHTML=operand2;
+                operand1="";
+                operand2="";
+                operator="";
+                res.innerHTML="";
+                res2.innerHTML="";
             }
-        }
-        else if(flag==0 && this.className=="keys operator" || this.className=="keys operator lastLine")
-        {
-            flag=1;
-            operator=this.innerHTML;
-            res.innerHTML="";
-
-        }
-        else if(flag==1 && this.className=="keys")
-        {
-            operand2 += this.innerHTML;
-            res.innerHTML=operand2;
-        }
-        else if(flag==1 && this.getAttribute("data-value")=="=")
-        {
-
-            var result = eval(operand1 + operator + operand2);
-            operand1=result;
-            operand2="";
-            res.innerHTML= result;
-            flag=0;
+            else if(this.getAttribute("data-value")=="negate")
+            {
+                res.innerHTML= '-' + res.innerHTML;
+            }
+            else if(this.getAttribute("data-value")=="=")
+            {
+                operand2=res.innerHTML;
+                res.innerHTML = operand1 + " "+ operator+" " + operand2;
+                res2.innerHTML =  eval(operand1 + operator + operand2);
+            }
         }
     });
 }
