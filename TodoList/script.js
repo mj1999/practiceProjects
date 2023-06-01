@@ -42,20 +42,33 @@ function deleteFromList(taskId)
 
 }
 
-function markComplete(taskId)
+function toggleTask(taskId)
 {
-    for(task of tasks)
+    for(let task of tasks)
     {
         if(task.id==taskId)
         {
-            task.completed = true;
+            task.completed = !task.completed;
         }
     }
     renderList();
 }
 
 function renderList(){
-
+    taskList.innerHTML="";
+    for( let task of tasks)
+    {
+        addToDom(task);
+    }
+    taskCount.innerHTML=tasks.length;
+}
+function addToDom(task){
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `
+        <input type="checkbox" ${task.completed?'checked':''} class ="custom-checkbox" id="${task.id}"><label for="${task.id}">${task.text}</label>
+    `;
+    taskList.append(listItem);
+    
 }
 
 addItem.addEventListener('keyup',getInput);
