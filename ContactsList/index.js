@@ -16,15 +16,9 @@ app.post('/add-contact',function(req,res){
 })
 app.get('/delete-number/:phone',function(req,res){
     const phoneObj = req.params;
-    for(let index in contacts)
-    {
-        
-        if(contacts[index].phone===phoneObj.phone)
-        {
-            contacts.splice(index,1);
-        }
-       
-    }
+    let index = contacts.findIndex((contact)=>contact.phone==phoneObj.phone);
+    
+    contacts.splice(index,1);
     
     res.redirect('/')
 })
