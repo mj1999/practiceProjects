@@ -1,0 +1,126 @@
+/* ---------------General Rules--------------------------- */
+
+body{
+    background-color: rgba(146, 146, 146, 0.911);
+    font-family: sans-serif;
+    color: gray;
+    font-size: 1.4rem;
+}
+input{
+    display: block;
+    transform: scaleY(1.3);
+    background-color: unset;
+    border: none;
+    width: 100%;
+}
+input:hover{
+    cursor: unset;
+}
+input:focus{
+    outline:solid 1px grey
+}
+input[type="checkbox"]{
+    outline:none;
+}
+hr{
+    margin: unset;
+    border: 1px solid grey;
+}
+select{
+    display: block;
+    width: 100%;
+    transform: scaleY(1.3);
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+form>div{
+    padding: 1%;
+}
+button{
+    width: 180px;
+    height:50px;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    font-weight: 500;
+}
+/* ------------------Specific Rules----------------------- */
+#display{
+    width:50%;
+    margin: auto;
+    background-color:  rgb(240, 239, 239);
+    margin-top: 2vh;
+    padding: 5px;
+    /* border: 2px solid black; */
+}
+#header{
+    color: black;
+    text-align: center;
+    margin: 2px;
+   
+}
+#header h1{
+    margin: unset;
+}
+#description:focus{
+    background-color: black;
+}
+#catg-date-box{
+    display: flex;
+}
+#category,#date{
+    width: 48%;
+}
+.vr{
+    width: 0;
+    border: 1px solid grey;
+    margin: 0 2%;
+    transform: scaleY(1.3) translateY(0.2vh);
+
+}
+#buttons{
+    margin: auto;
+}
+#add-task{
+    background-color: green;
+}
+#delete-task{
+    background-color: red;
+}
+
+.task-card{
+    display: flex;
+    padding: 2%;
+    font-size: 1rem;
+}
+.checkbox{
+    width: 5%;
+    margin-top: 0.5vh;
+    margin-right: 1vw;
+}
+.card-label{
+    width: 90%;
+    display: flex;
+}
+.desc-date{
+    width: 85%;
+}
+.category-tag{
+    width: 15%;
+}
+.category-tag>div{
+    transform: translateY(50%);
+    text-align: center;
+    color: white;
+}
+.card-desc{
+    font-weight: 500;
+    color: black;
+}
+.card-date{
+    color:rgb(151, 147, 147);
+    font-weight: 400;
+}
+
+

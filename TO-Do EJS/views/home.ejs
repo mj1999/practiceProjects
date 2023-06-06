@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/82fb7d07d4.js" crossorigin="anonymous"></script>
+    <title>My Planner</title>
+</head>
+<body>
+    
+    <div id="display"> 
+        <div id="header">
+            <h1>My Planner</h1>
+        </div>
+        <hr>
+        <form action="/add" method="post">
+            <div>
+                <label for="disc"> 
+                    <div id="description">
+                        DESCRIPTION
+                        <input type="text" name="description" id="disc" placeholder="What do you want to do" required>
+                    </div>
+                </label>
+            </div>
+            <hr>
+            <div id="catg-date-box">
+                
+                <div id="category">
+                    CATEGORY
+                    <select name="category">
+                        <option>Select Type</option>
+                        <option>Personal</option>
+                        <option>Work</option>
+                        <option>Home</option>
+                        <option>Others</option>    
+                    </select>
+
+                </div>
+                <div class="vr"></div>
+                <div id="date">
+                    DATE
+                    <input name="date" required="false" type="date"  required>
+                </div>
+              
+            </div>
+            <hr style="margin-top: 2px;">
+            
+            <div id="buttons">
+                <button id="add-task" type="submit">
+                    <i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add-Task
+                </button>
+                &nbsp;&nbsp;
+                <a id="delete-anchor"><button type="button" id="delete-task">
+                    <i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete-task
+                </button></a>
+            </div>
+        </form>
+
+        <div id="tasks">
+                
+            <% for(let task of tasks){ %>
+                <hr>
+                <div class="task-card">
+                    <div class="checkbox"><input type="checkbox" id="<%= task._id %>"></div>
+                    <label class="card-label" for="<%= task._id %>">
+                        <div class="desc-date">
+                            <div class="card-desc">
+                                <%= task.description %>
+                            </div>
+                            <div class="card-date">
+                            <% if(task.date){ %>
+                                <% 
+                                    let date = dateSplit(task);
+                                %>
+                                <div ><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;<%= date%></div>
+                            <% }else{ %>
+                                <div style="color: rgb(192, 188, 188);">No Deadline</div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="category-tag" >
+                            <% if(task.category!='Select Type'){ %>
+                                <div><%= task.category.toUpperCase() %></div>
+
+                            <% } %>
+                        </div>
+                    </label> 
+                </div>
+            <% } %>
+            
+        </div>
+
+
+    </div>
+
+    
+
+    <script src="/scripts/script.js"></script>
+</body>
+</html>
