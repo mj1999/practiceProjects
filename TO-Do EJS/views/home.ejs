@@ -52,7 +52,7 @@
                     <i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add-Task
                 </button>
                 &nbsp;&nbsp;
-                <a id="delete-anchor"><button type="button" id="delete-task">
+                <a id="delete-anchor"><button type="button" id="delete-task">                     <!--href attribute added from the static script based on the checkboxes checked -->
                     <i class="fa-solid fa-trash"></i>&nbsp;&nbsp;Delete-task
                 </button></a>
             </div>
@@ -72,17 +72,17 @@
                             <div class="card-date">
                             <% if(task.date){ %>
                                 <% 
-                                    let date = dateSplit(task);
+                                    let date = dateSplit(task);                                               <!--   //function for splitting date and only showing day and month-->
                                 %>
                                 <div ><i class="fa-solid fa-calendar-days"></i>&nbsp;&nbsp;<%= date%></div>
-                            <% }else{ %>
+                            <% }else{ %>                                                                        <!--If date not present , add No Deadline below task description-->
                                 <div style="color: rgb(192, 188, 188);">No Deadline</div>
                                 <% } %>
                             </div>
                         </div>
                         <div class="category-tag" >
                             <% if(task.category!='Select Type'){ %>
-                                <div><%= task.category.toUpperCase() %></div>
+                                <div><%= task.category.toUpperCase() %></div>                               <!--     // Task Category Card info -->
 
                             <% } %>
                         </div>
@@ -97,6 +97,6 @@
 
     
 
-    <script src="/scripts/script.js"></script>
+    <script src="/scripts/script.js"></script>                                                      <!--Static Script-->
 </body>
 </html>

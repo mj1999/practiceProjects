@@ -1,8 +1,9 @@
 document.querySelector('#date>input[type="date"]').removeAttribute('required');
-let arr = document.querySelectorAll('.category-tag');
-let del = document.getElementById("delete-anchor");
+const arr = document.querySelectorAll('.category-tag');
+const del = document.getElementById("delete-anchor");
+
+
 function categoryColor(category){
-    console.log(category.innerText.toLowerCase());
     switch (category.innerText.toLowerCase()){
         case 'personal':
             return 'blue';
@@ -18,22 +19,19 @@ function categoryColor(category){
 }
 for(let category of arr)
 {
-    let color = categoryColor(category);
+    let color = categoryColor(category);                                // category div's background color being added based on inner text (category name)
     category.style.background = color;
 }
 
 del.addEventListener('click',(e)=>{
     let elementsToDelete = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'));
-    
     let str="";
     let i=1;
     for(let el of elementsToDelete)
     {
-        str+='q'+i+'='+el.getAttribute('id')+'&';
+        str+='q'+i+'='+el.getAttribute('id')+'&';           //all checked elements id being concatinated as a single string which is later passed to the anchor tag's href attribute
         i++;
     }
-    console.log(str);
-    // console.log(del.getAttribute('href'));
     del.setAttribute('href','delete/?'+str);
 
 })

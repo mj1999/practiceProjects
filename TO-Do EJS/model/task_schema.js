@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const task_schema = new mongoose.Schema({
-    description:{
+    description:{                                                                                           //task schema model for mongoDB
         type:String,
         required:true
     },
@@ -13,5 +13,5 @@ const task_schema = new mongoose.Schema({
         required:false
     }
 })
-const Tasks = mongoose.model('tasks',task_schema);
+const Tasks = mongoose.model('tasks',task_schema);                                          //schema creation in our database
 module.exports = Tasks;

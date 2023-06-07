@@ -7,11 +7,11 @@ module.exports.add_task = function(req,res){
     res.redirect('back');
 }
 module.exports.delete_task = function(req,res){
-    const str = req.query;
+    const str = req.query;                                                  //query string containing concatinated id's of all checked elements
     for(let q in str)
     {
         let id = str[q];
-        let deletion = Tasks.findByIdAndDelete(id);
+        let deletion = Tasks.findByIdAndDelete(id);                         // deleting checked tasks one by one by findbyidanddelete function
         deletion.then(()=>{res.redirect('back')}).catch(()=>{console.log('Error while deleting',id)});
     }
    
