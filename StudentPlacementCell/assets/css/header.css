@@ -1,0 +1,17 @@
+#navbar {
+  display: flex;
+  height: 2.5vh;
+  padding: 2px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: azure;
+}
+#navbar img {
+  height: 3vh;
+  width: 4vw;
+}
+#navbar ul li {
+  display: inline-block;
+  list-style: none;
+  margin-right: 0.5vw;
+}

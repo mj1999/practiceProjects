@@ -1,0 +1,126 @@
+<link rel="stylesheet" href="/css/home.css" />
+<h1>Welcome to XYZ placement management portal</h1>
+<p>
+  A one stop place for managing all your students information and getting
+  their placement reports
+</p>
+<%if(locals.user){%>
+  <div id="tabs">
+    <span class="active" id="student-tab"><h1 >Students</h1></span>
+    <span id="interview-tab"><h1 >Interviews</h1></span>
+  </div>
+
+<div id="student-display" class="tab-display">
+  <h2>Add student </h2>
+  <form id="student-form" class="form-display">
+    Student's name : <input name="name" required/>
+    Student's email : <input name="email" required/>
+    College name : <input name="college" required/>
+    Batch number : <input name="batch" required/>
+    DSA module score : <input name="DSA_score" required/>
+    Web-dev module score : <input name="webD_score" required/>
+    React module score : <input name="react_score" required/>
+    <input type="submit"/>
+  </form>
+  <ol id="students-list">
+    <% for(let student of all_students){%>
+      <li>
+        <div id="<%= student.id %>" class="student-list-item">
+            <div class="student-info">
+              <h3>Student Information</h3>
+                <div class="student-name">Name : <span><%= student.name%></span></div>
+                <div class="student-name">Email : <span><%=student.email%></span></div>
+                <div class="student-college">College : <span><%=student.college%></span></div>
+            </div>
+            <div class="student-batch"><h3>Student Batch</h3> <div><%=student.batch%></div></div>
+            <div class="student-course-info">
+              <h3>Student Course Marks</h3>
+                <div class="score-dsa">DSA Module Score : <span><%=student.DSA_score%></span></div>
+                <div class="score-webd">WebDev Module Score : <span><%=student.webD_score%></span></div>
+                <div class="score-react">React Module Score : <span><%=student.react_score%></span></div>
+            </div>
+            <div>
+              <h3>Student Status</h3>
+              <form class="student-status">
+                <span><label for="not_placed_<%=student.id%>">Not Placed</label><input type="radio" id="not_placed_<%=student.id%>" <%=student.status=='not_placed'?"checked":''%> value="not_placed" name="status"></span>
+                <span><label for="placed_<%=student.id%>">Placed</label><input id="placed_<%=student.id%>" type="radio" <%=student.status=='placed'?'checked':''%> value="placed" name="status"></span>
+                <button type="submit">Update</button>
+              </form>
+            </div>
+        </div>
+      </li>
+    <%}%>
+
+    </ol>
+</div>
+<div id="interview-display" class="tab-display hidden">
+  <h2>Add Interview </h2>
+  <form id="interview-form" class="form-display">
+    Company name : <input name="company" required/>
+    Interview Date : <input name="date" type="date" required/>
+    <input type="submit"/>
+  </form>
+  <ol id="interviews-list">
+    <% for(let interview of all_interviews){%>
+      <li>
+        <div id="<%= interview.id %>" class="interview-list-item">
+            <div class="student-batch"><h3>Company Name</h3> <div><%=interview.company%></div></div>
+            <div class="student-batch"><h3>Interview Date</h3> <div><%=interview.date%></div></div>
+        </div>
+        <div class="hidden students-allocation">
+          <form class="student-allocation-form">
+            Student's name : <select name="student_id">
+              <%for(let student of all_students){%>
+                <option value="<%=student.id%>"><%= student.name %></option>
+              <%}%>
+            </select>
+            <input type="hidden" name="interview_id" value="<%= interview.id %>" />
+            <button type="submit">Allocate student</button>
+          </form>
+          <ol id="students-list">
+            <% for(let student of interview.students){%>
+              <li>
+                <div id="<%= student.id %>" class="student-list-item">
+                    <div class="student-info">
+                      <h3>Student Information</h3>
+                        <div class="student-name">Name : <span><%= student.name%></span></div>
+                        <div class="student-name">Email : <span><%=student.email%></span></div>
+                        <div class="student-college">College : <span><%=student.college%></span></div>
+                    </div>
+                    <div class="student-batch"><h3>Student Batch</h3> <div><%=student.batch%></div></div>
+                    <div class="student-course-info">
+                      <h3>Student Course Marks</h3>
+                        <div class="score-dsa">DSA Module Score : <span><%=student.DSA_score%></span></div>
+                        <div class="score-webd">WebDev Module Score : <span><%=student.webD_score%></span></div>
+                        <div class="score-react">React Module Score : <span><%=student.react_score%></span></div>
+                    </div>
+                    <div>
+                      <h3>Interview Result</h3>
+                      <form  class="interview-result">
+                        <select name="result">
+                          <option value="On-hold">On-hold</option>
+                          <option value="Pass">Pass</option>
+                          <option value="Fail">Fail</option>
+                          <option value="Did not Attempt">Did not Attempt</option>
+                        </select>
+                        <button type="submit">Update</button>
+                      </form>
+                    </div>
+                </div>
+
+              </li>
+            <%}%>
+          </ol>
+          <br/>
+          <button class="hide-display">Hide</button>
+        </div>
+      </li>
+    <%}%>
+    </ol>
+</div>
+
+<%}else{%>
+<p><h1>You are not logged in</h1></p>
+<%}%>
+
+<script src="/js/home.js"></script>

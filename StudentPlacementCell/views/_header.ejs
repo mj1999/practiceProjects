@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="/css/header.css" />
+<div id="navbar">
+  <a href="/"><img class="logo" src="/images/logo.jpeg" /></a>
+  <%if(locals.user){%>
+  <ul>
+    <li><a href="/auth/logout">Sign-out</a></li>
+  </ul>
+  <%} else{%>
+  <ul>
+    <li><a href="/auth/login">Login</a></li>
+    <li><a href="/auth/register">Register</a></li>
+  </ul>
+
+  <%}%>
+</div>

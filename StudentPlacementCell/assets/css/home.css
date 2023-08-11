@@ -1,0 +1,105 @@
+#tabs {
+  width: 100%;
+  display: inline-flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+#tabs > * {
+  padding: 0 5px;
+}
+#tabs > *:hover {
+  cursor: pointer;
+}
+.active {
+  background-color: antiquewhite;
+}
+
+.tab-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: antiquewhite;
+  justify-content: center;
+}
+.form-display {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 50%;
+  align-items: center;
+}
+.form-display input {
+  width: 50%;
+}
+.form-display input[type="submit"] {
+  margin-top: 1vh;
+  width: 30%;
+  border-radius: 7px;
+}
+.form-display > * {
+  margin-bottom: 1vh;
+}
+#students-list {
+  width: 70%;
+}
+#interviews-list {
+  width: 70%;
+}
+#students-list li {
+  padding-left: 1%;
+  padding-bottom: 1%;
+  border-bottom: 1px solid black;
+}
+#students-list li::marker {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+#interviews-list li {
+  padding-left: 1%;
+  padding-bottom: 1%;
+  border-bottom: 1px solid black;
+}
+#interviews-list li::marker {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.student-list-item {
+  display: flex;
+  width: 100%;
+}
+.student-list-item > * {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+.interview-list-item {
+  margin-top: 1%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.interview-list-item:hover {
+  cursor: pointer;
+  background-color: rgba(230, 186, 129, 0.74);
+}
+.interview-list-item > * {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+}
+.student-status {
+  display: flex;
+}
+.student-status span {
+  margin-right: 1vw;
+}
+
+.student-allocation {
+  transition: all 0.5s;
+  margin-top: 1%;
+}
+
+.hidden {
+  display: none;
+}
