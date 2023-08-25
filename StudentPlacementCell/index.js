@@ -10,7 +10,6 @@ const flash = require("connect-flash");
 const flashMiddleware = require("./config/flash_middleware");
 const passport = require("passport");
 const passportLocal = require("./config/passport_local");
-
 //form data decoding
 app.use(express.urlencoded());
 

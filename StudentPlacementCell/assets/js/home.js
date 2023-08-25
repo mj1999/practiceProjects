@@ -46,10 +46,13 @@ let addStudent = function () {
         let studentsList = $("#students-list");
         let newStudent = newStudentDom(data.data.student);
         studentsList.prepend(newStudent);
+        let statusForm = $(" .student-status", newStudent);
+        updateStudentStatus(statusForm);
+        notification("success", "Student added successfully");
       },
       error: function (err) {
         console.log(err.responseText);
-        // notification("error", "Student couldnt be added");
+        notification("error", "Student couldnt be added");
       },
     });
     e.target.reset();
@@ -74,10 +77,11 @@ let addInterview = function () {
         interviewList.prepend(newInterview);
         newInterview.click(showAllocatedStudents);
         allocateStudent($(" .student-allocation-form", newInterview));
+        notification("success", "Interview added successfully");
       },
       error: function (err) {
         console.log(err.responseText);
-        // notification("error", "Interview couldnt be added");
+        notification("error", "Interview couldnt be added");
       },
     });
     e.target.reset();
@@ -94,12 +98,59 @@ let allocateStudent = function (allocateStudentForm) {
       success: function (data) {
         console.log(data);
         let studentsList = allocateStudentForm.siblings("#students-list");
-        let newStudent = newAllocatedStudentDom(data.data.student);
+        let newStudent = newAllocatedStudentDom(
+          data.data.student,
+          data.data.result
+        );
         studentsList.prepend(newStudent);
+        let interviewResultForm = $(" .interview-result", newStudent);
+        updateInterviewResult(interviewResultForm);
+        notification("success", "Student allocated to Interview");
       },
       error: function (err) {
         console.log(err.responseText);
-        // notification("error", "Student couldnt be allocated to the interview");
+        notification("error", "Student couldnt be allocated to the interview");
+      },
+    });
+  });
+};
+
+let updateStudentStatus = function (studentStatusForm) {
+  studentStatusForm.submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "post",
+      url: "/students/update",
+      data: studentStatusForm.serialize(),
+      success: function (data) {
+        notification("success", "Student status changed");
+      },
+      error: function (err) {
+        console.log(err.responseText);
+        notification("error", "Student status couldnt be changed");
+      },
+    });
+  });
+};
+
+let updateInterviewResult = function (interviewResultForm) {
+  interviewResultForm.submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: "post",
+      url: "/interviews/update",
+      data: interviewResultForm.serialize(),
+      success: function (data) {
+        let resultHeader = interviewResultForm.siblings("h3");
+        console.log(resultHeader);
+        let resultString = $(" span", resultHeader);
+        console.log(resultString);
+        resultString.text("(" + data.data.result.result + ")");
+        notification("success", "Interview result updated");
+      },
+      error: function (err) {
+        console.log(err.responseText);
+        notification("error", "Student couldnt be allocated to the interview");
       },
     });
   });
@@ -148,6 +199,7 @@ let newStudentDom = function (student) {
             }">Placed</label><input id="placed_${student._id}" type="radio" ${
     student.status == "placed" ? "checked" : ""
   } value="placed" name="status"></span>
+            <input type="hidden" name="student_id" value="${student._id}" />
             <button type="submit">Update</button>
           </form>
         </div>
@@ -155,7 +207,7 @@ let newStudentDom = function (student) {
     </li>`);
 };
 
-let newAllocatedStudentDom = function (student) {
+let newAllocatedStudentDom = function (student, result) {
   return $(`<li>
     <div id="${student._id}" class="student-list-item">
         <div class="student-info">
@@ -172,7 +224,7 @@ let newAllocatedStudentDom = function (student) {
             <div class="score-react">React Module Score : <span>${student.react_score}</span></div>
         </div>
         <div>
-          <h3>Interview Result</h3>
+          <h3>Interview Result:<span class="result-string"></span></h3>
           <form  class="interview-result">
             <select name="result">
               <option value="On-hold">On-hold</option>
@@ -180,6 +232,8 @@ let newAllocatedStudentDom = function (student) {
               <option value="Fail">Fail</option>
               <option value="Did not Attempt">Did not Attempt</option>
             </select>
+            <input type="hidden" name="interview_id" value="${result.interview._id}">
+            <input type="hidden" name="student_id" value="${result.student._id}">
             <button type="submit">Update</button>
           </form>
         </div>
@@ -196,10 +250,10 @@ let studentOptionDom = function (student) {
 let newInterviewDom = function (interview, students) {
   return $(`<li>
         <div id="${interview._id}" class="interview-list-item">
-            <div class="student-batch"><h3>Company Name</h3> <div>${
+            <div class="student-batch"><h3>Company Name</h3> <div class="name">${
               interview.company
             }</div></div>
-            <div class="student-batch"><h3>Interview Date</h3> <div>${
+            <div class="student-batch"><h3>Interview Date (Year-Month-Day) </h3> <div>${
               interview.date
             }</div></div>
         </div>
@@ -227,4 +281,22 @@ for (let allocationForm of $(".student-allocation-form")) {
   allocateStudent($(allocationForm));
 }
 
+for (let resultForm of $(".interview-result")) {
+  updateInterviewResult($(resultForm));
+}
+
+for (let statusForm of $(".student-status")) {
+  updateStudentStatus($(statusForm));
+}
+
 $(".interview-list-item").click(showAllocatedStudents);
+
+const notification = function (type, message) {
+  new Noty({
+    theme: "relax",
+    text: message,
+    type: type,
+    layout: "topRight",
+    timeout: 1500,
+  }).show();
+};

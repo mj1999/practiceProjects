@@ -1,0 +1,13 @@
+Student ID,Student Name,Student College,Student Batch,DSA Score,Web-Dev Score,React Score,Student Status,Interviewed Company,Interview Date,Result
+64cf7d344c2c733d9206c310,Aakash,Jiit,B10,70%,50%,95%,placed,Flipkart,2023-08-10,Did not Attempt
+64cf7e42a242aea70903a618,Nikhil Yadav,Delhi University,B12,70%,50%,40%,not_placed,Flipkart,2023-08-10,Fail
+64d76599c50e8276e209c34f,Himani,QueensMarycs,B12,70%,50%,90%,not_placed,Flipkart,2023-08-10,Fail
+64cf7d5e4c2c733d9206c317,Mayank Joshi,Jaypee Institute of information and technology,B12,90%,90%,95%,placed,Flipkart,2023-08-10,Pass
+64cf7d5e4c2c733d9206c317,Mayank Joshi,Jaypee Institute of information and technology,B12,90%,90%,95%,placed,Amazon,2023-08-16,On-hold
+64cf7de525d5fcecd5a8d8e9,Nikhil,Gateway College,B12,70%,50%,40%,not_placed,Amazon,2023-08-16,On-hold
+64cf7d344c2c733d9206c310,Aakash,Jiit,B10,70%,50%,95%,placed,Delloite,2023-08-20,On-hold
+64cf7e42a242aea70903a618,Nikhil Yadav,Delhi University,B12,70%,50%,40%,not_placed,Delloite,2023-08-20,On-hold
+64cf7bcadb6f7da958624cd8,Ritvick,SRM,B11,90%,90%,40%,not_placed,Tata Consultancy Services,2023-08-31,On-hold
+64d76445884198e0a0b7cf61,Rakshit,NarsiMunjhi,B12,90%,90%,90%,not_placed,Tata Consultancy Services,2023-08-31,On-hold
+64cf7de525d5fcecd5a8d8e9,Nikhil,Gateway College,B12,70%,50%,40%,not_placed,FDDI,2023-09-15,On-hold
+64cf7cbd3178d575264f1889,Parishka Benjari,CRM,B10,90%,100%,95%,not_placed,FDDI,2023-09-15,On-hold

@@ -1,3 +1,11 @@
+#download a button {
+  font-size: 1.5rem;
+}
+#download {
+  position: absolute;
+  top: 10vh;
+  right: 1.5vw;
+}
 #tabs {
   width: 100%;
   display: inline-flex;
@@ -98,6 +106,13 @@
 .student-allocation {
   transition: all 0.5s;
   margin-top: 1%;
+}
+.result-string {
+  color: blue;
+}
+.name {
+  color: rgb(139, 93, 5);
+  font-size: 1.6rem;
 }
 
 .hidden {

@@ -5,6 +5,8 @@
   their placement reports
 </p>
 <%if(locals.user){%>
+  <div id="download"><a  href="/download" download="student_records.csv"><button>Download Student Records <i class="fa-solid fa-file-arrow-down"></i></button></a></div>
+  </br>
   <div id="tabs">
     <span class="active" id="student-tab"><h1 >Students</h1></span>
     <span id="interview-tab"><h1 >Interviews</h1></span>
@@ -44,6 +46,7 @@
               <form class="student-status">
                 <span><label for="not_placed_<%=student.id%>">Not Placed</label><input type="radio" id="not_placed_<%=student.id%>" <%=student.status=='not_placed'?"checked":''%> value="not_placed" name="status"></span>
                 <span><label for="placed_<%=student.id%>">Placed</label><input id="placed_<%=student.id%>" type="radio" <%=student.status=='placed'?'checked':''%> value="placed" name="status"></span>
+                <input type="hidden" value="<%= student.id %>" name="student_id" />
                 <button type="submit">Update</button>
               </form>
             </div>
@@ -64,8 +67,8 @@
     <% for(let interview of all_interviews){%>
       <li>
         <div id="<%= interview.id %>" class="interview-list-item">
-            <div class="student-batch"><h3>Company Name</h3> <div><%=interview.company%></div></div>
-            <div class="student-batch"><h3>Interview Date</h3> <div><%=interview.date%></div></div>
+            <div class="student-batch"><h3>Company Name</h3> <div class="name"><%=interview.company%></div></div>
+            <div class="student-batch"><h3>Interview Date (Year-Month-Day) </h3> <div><%=interview.date%></div></div>
         </div>
         <div class="hidden students-allocation">
           <form class="student-allocation-form">
@@ -78,31 +81,33 @@
             <button type="submit">Allocate student</button>
           </form>
           <ol id="students-list">
-            <% for(let student of interview.students){%>
+            <% for(let result of interview.results){%>
               <li>
-                <div id="<%= student.id %>" class="student-list-item">
+                <div class="student-list-item">
                     <div class="student-info">
                       <h3>Student Information</h3>
-                        <div class="student-name">Name : <span><%= student.name%></span></div>
-                        <div class="student-name">Email : <span><%=student.email%></span></div>
-                        <div class="student-college">College : <span><%=student.college%></span></div>
+                        <div class="student-name">Name : <span><%= result.student.name%></span></div>
+                        <div class="student-name">Email : <span><%=result.student.email%></span></div>
+                        <div class="student-college">College : <span><%=result.student.college%></span></div>
                     </div>
-                    <div class="student-batch"><h3>Student Batch</h3> <div><%=student.batch%></div></div>
+                    <div class="student-batch"><h3>Student Batch</h3> <div><%=result.student.batch%></div></div>
                     <div class="student-course-info">
                       <h3>Student Course Marks</h3>
-                        <div class="score-dsa">DSA Module Score : <span><%=student.DSA_score%></span></div>
-                        <div class="score-webd">WebDev Module Score : <span><%=student.webD_score%></span></div>
-                        <div class="score-react">React Module Score : <span><%=student.react_score%></span></div>
+                        <div class="score-dsa">DSA Module Score : <span><%=result.student.DSA_score%></span></div>
+                        <div class="score-webd">WebDev Module Score : <span><%=result.student.webD_score%></span></div>
+                        <div class="score-react">React Module Score : <span><%=result.student.react_score%></span></div>
                     </div>
                     <div>
-                      <h3>Interview Result</h3>
-                      <form  class="interview-result">
+                      <h3>Interview Result:<span class="result-string">(<%= result.result %>)</span></h3>
+                      <form  class="interview-result" >
                         <select name="result">
                           <option value="On-hold">On-hold</option>
                           <option value="Pass">Pass</option>
                           <option value="Fail">Fail</option>
                           <option value="Did not Attempt">Did not Attempt</option>
                         </select>
+                        <input type="hidden" name="interview_id" value="<%=result.interview.id%>">
+                        <input type="hidden" name="student_id" value="<%=result.student.id%>">
                         <button type="submit">Update</button>
                       </form>
                     </div>

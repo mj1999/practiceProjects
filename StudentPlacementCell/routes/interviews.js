@@ -4,5 +4,6 @@ const interviewController = require("../controller/interviewController");
 
 router.post("/add", interviewController.create);
 router.post("/allocate-student", interviewController.allocateStudent);
+router.post("/update", interviewController.updateResult);
 
 module.exports = router;
