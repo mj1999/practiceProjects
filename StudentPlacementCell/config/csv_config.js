@@ -1,3 +1,5 @@
+// configuration for the csvwriter library giving instructions for data that will be present in the converted csv file
+
 const createCsvWriter = require("csv-writer").createObjectCsvWriter;
 const csvWriter = createCsvWriter({
   path: "assets/csv/record.csv",
@@ -47,7 +49,7 @@ const csvWriter = createCsvWriter({
       title: "Result",
     },
   ],
-  headerIdDelimiter: ".",
+  headerIdDelimiter: ".", // sets the value that tells the function in the library to look for this value and then travel deeper into the object, i.e. chained objects are present in the value
 });
 
 module.exports = csvWriter;

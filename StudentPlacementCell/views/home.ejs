@@ -44,6 +44,7 @@
             <div>
               <h3>Student Status</h3>
               <form class="student-status">
+                <!-- Conditional statements present for checking the status of student and based on that status adding checked attribute to the checkboxes -->
                 <span><label for="not_placed_<%=student.id%>">Not Placed</label><input type="radio" id="not_placed_<%=student.id%>" <%=student.status=='not_placed'?"checked":''%> value="not_placed" name="status"></span>
                 <span><label for="placed_<%=student.id%>">Placed</label><input id="placed_<%=student.id%>" type="radio" <%=student.status=='placed'?'checked':''%> value="placed" name="status"></span>
                 <input type="hidden" value="<%= student.id %>" name="student_id" />
@@ -72,6 +73,7 @@
         </div>
         <div class="hidden students-allocation">
           <form class="student-allocation-form">
+            <!-- students added to the Select Options for allocation based on the students present in the database -->
             Student's name : <select name="student_id">
               <%for(let student of all_students){%>
                 <option value="<%=student.id%>"><%= student.name %></option>

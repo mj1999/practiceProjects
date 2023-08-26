@@ -15,6 +15,7 @@ module.exports.add = async function (req, res) {
   }
 };
 module.exports.updateStatus = async function (req, res) {
+  //function to update the status of students, wether placed or not
   try {
     let student = await Students.findOneAndUpdate(
       {

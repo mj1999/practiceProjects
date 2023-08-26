@@ -35,6 +35,7 @@ passport.deserializeUser(function (id, done) {
     });
 });
 
+// middleware that adds user to the locals object if req.isauthenticated returns true
 passport.setAuthUser = function (req, res, next) {
   if (req.isAuthenticated()) {
     res.locals.user = req.user;

@@ -1,3 +1,5 @@
+// functions to show and hide display of interviews based on click actions
+
 $("#tabs>*").click(function (e) {
   if (e.target.innerText == "Students") {
     $("#interview-tab").removeClass("active");
@@ -19,6 +21,8 @@ let hideParent = function (el) {
     parent.addClass("hidden");
   });
 };
+
+//functions for doing actions using ajax calls so that page doesnt need to be reloaded or redirected to another address
 
 let showAllocatedStudents = function (e) {
   let target = $(e.target);
@@ -156,6 +160,8 @@ let updateInterviewResult = function (interviewResultForm) {
   });
 };
 
+// Doms creation
+
 let newStudentDom = function (student) {
   return $(`<li>
     <div id="${student._id}" class="student-list-item">
@@ -277,6 +283,8 @@ let newInterviewDom = function (interview, students) {
 addStudent();
 addInterview();
 
+// calls to allocate an instance of above created functions to all the places its required
+
 for (let allocationForm of $(".student-allocation-form")) {
   allocateStudent($(allocationForm));
 }
@@ -291,6 +299,7 @@ for (let statusForm of $(".student-status")) {
 
 $(".interview-list-item").click(showAllocatedStudents);
 
+// for usinf NOTY notifications
 const notification = function (type, message) {
   new Noty({
     theme: "relax",

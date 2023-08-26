@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 
 module.exports.create = async function (req, res) {
   try {
-    console.log(req.body);
     let interview = await Interviews.create({
       company: req.body.company,
       date: req.body.date,
@@ -23,6 +22,7 @@ module.exports.create = async function (req, res) {
   }
 };
 module.exports.allocateStudent = async function (req, res) {
+  // function to allocate student to an interview , it adds student to the interview as well as adds an entry with default value for result for the results schema
   try {
     let student = await Students.findById(req.body.student_id);
     let result = await Results.create({
@@ -49,6 +49,7 @@ module.exports.allocateStudent = async function (req, res) {
 };
 
 module.exports.updateResult = async function (req, res) {
+  // updates the result of the interview changing it from default value i.e. on hold
   try {
     let result = await Results.findOneAndUpdate(
       {

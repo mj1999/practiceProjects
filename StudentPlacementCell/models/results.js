@@ -1,3 +1,5 @@
+//Model for results that forms a relation between student and interview and its result
+
 const mongoose = require("mongoose");
 
 const resultSchema = new mongoose.Schema({
