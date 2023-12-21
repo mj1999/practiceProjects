@@ -1,3 +1,7 @@
+#Album app
+**A app that fetched album data from server and displays them, user can then add new album, update or delete existing albums **
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
