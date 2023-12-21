@@ -24,6 +24,8 @@ function Dropdown({ items, width, fontSize }) {
           src="https://toppng.com/uploads/preview/arrow-down-icon-11549436707mosicxsqad.png"
           className="icon"
         />
+        {/* input value which can be further passed on to the form based on the drowdown selection */}
+        <input value={select} type="hidden" />
       </div>
       {visible ? (
         <div className="items-display">
