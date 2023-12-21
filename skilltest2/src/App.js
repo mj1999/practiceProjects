@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import AlbumItem from "./AlbumItem";
 function App() {
-  const [items, setItems] = useState([]);
-  const [formVisible, setFormVisible] = useState(false);
-  const [title, setTitle] = useState("");
-  const [userID, setUserID] = useState("");
+  const [items, setItems] = useState([]); // State for album items, updated once all albums are fetched from the server
+  const [formVisible, setFormVisible] = useState(false); // State used to toggle visibility of add album form
+  const [title, setTitle] = useState(""); // state variable to store new album title value
+  const [userID, setUserID] = useState(""); // state variable to store new album userID value
+
+  // Style variables
   const displayStyle = {
     display: "flex",
     flexWrap: "wrap",
@@ -30,6 +32,8 @@ function App() {
     alignItems: "center",
     width: "20vw",
   };
+
+  // common function to handle form input field values and update our title and userID state variables , title argument is a boolean value which tells us wether we are updating title or user input state variable
   function handleInput(e, title) {
     if (title) {
       setTitle(e.target.value);
@@ -37,12 +41,16 @@ function App() {
       setUserID(e.target.value);
     }
   }
+
+  // function to handle form submission
   function handleSubmit(e) {
     e.preventDefault();
+    //Check to make sure user ID entered can only be a numeric value
     if (isNaN(+userID)) {
-      window.alert("User ID can only be a numeric value");
+      window.alert("User ID can only be a numeric value"); //if not numeric alert user
       return;
-    } else {
+    } //else do dummy POST call to the server using the data
+    else {
       fetch("https://jsonplaceholder.typicode.com/posts", {
         method: "POST",
         body: JSON.stringify({
@@ -55,17 +63,19 @@ function App() {
       }).then((res) => {
         res.json().then((data) => {
           data.userId = data.userID;
-          setItems((items) => [data, ...items]);
+          setItems((items) => [data, ...items]); // updating album items state variable so that newly added album is visible despite it being a dummy call to the server
         });
       });
       setFormVisible(false);
     }
   }
+  //function to handle album delete which takes album id as a argument based on which album items state variable is updated using filter function and dummy delete call is sent to the server
   function handleDelete(id) {
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
       method: "DELETE",
     }).then((response) => {
       if (response.ok) {
+        // if call was success server returns a boolean ok value to tell the same
         setItems((items) => items.filter((item) => item.id !== id));
       } else {
         window.alert("Error updating values");
@@ -73,6 +83,7 @@ function App() {
     });
   }
   useEffect(() => {
+    //function to fetch data from the server and update our state variable based on that
     async function getData() {
       const res = await fetch("https://jsonplaceholder.typicode.com/albums");
       const data = await res.json();

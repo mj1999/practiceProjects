@@ -1,9 +1,11 @@
 import { useState } from "react";
-
+//component for individual album item rendered from album items state variable array which is fetched from the server
 function AlbumItem({ userId, title, id }) {
-  const [userIdVal, setUserIdVal] = useState(userId);
-  const [titleVal, setTitleVal] = useState(title);
-  const [showForm, setShowForm] = useState(false);
+  const [userIdVal, setUserIdVal] = useState(userId); // state variable storing userId value returned from the server so that it can be updated by user
+  const [titleVal, setTitleVal] = useState(title); // state variable storing title value returned from the server so that it can be updated by user
+  const [showForm, setShowForm] = useState(false); // state variable to toggle visibility of edit/update form
+
+  // common function to handle form input field values and update our title and userID state variables , title argument is a boolean value which tells us wether we are updating title or user input state variable
   function handleInput(e, title) {
     if (title) {
       setTitleVal(e.target.value);
@@ -11,8 +13,10 @@ function AlbumItem({ userId, title, id }) {
       setUserIdVal(e.target.value);
     }
   }
+  //fuction to handle update form submission, a dummy PUT value is sent to the server and corresponding state variables are updated.
   function handleSubmit(e) {
     e.preventDefault();
+    //to check if updated userId value is only a numeric value
     if (isNaN(+userIdVal)) {
       window.alert("User ID can only be a numeric value");
       return;
@@ -26,14 +30,11 @@ function AlbumItem({ userId, title, id }) {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((response) => {
-      if (response.ok) {
-        setShowForm(false);
-      } else {
-        window.alert("Error updating values");
-      }
+    }).then(() => {
+      setShowForm(false);
     });
   }
+  //style variables
   const displayStyle = {
     display: "flex",
     width: showForm ? "auto" : "95%",
