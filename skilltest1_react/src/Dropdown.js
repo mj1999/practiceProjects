@@ -3,8 +3,9 @@ import "./dropdown.css";
 
 function Dropdown({ items, width, fontSize }) {
   const dim = { width, fontSize };
-  const [visible, setVisible] = useState(false);
-  const [select, setSelect] = useState("SELECT");
+  const [visible, setVisible] = useState(false); // State which toggles dropdown list on hover
+  const [select, setSelect] = useState("SELECT"); // State which displays selected dropdown option on the main display block
+  // function to handle option select
   function handleClick(item) {
     setSelect(item);
     setVisible(false);

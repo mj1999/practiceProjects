@@ -1,5 +1,5 @@
 import Dropdown from "./Dropdown";
-const items = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"];
+const items = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"]; // Dropdown items
 function App() {
   return (
     <div className="App" style={{ backgroundColor: "grey", height: "100vh" }}>
