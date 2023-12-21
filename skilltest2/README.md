@@ -1,4 +1,4 @@
-#Album app
+# Album app
 **A app that fetched album data from server and displays them, user can then add new album, update or delete existing albums **
 
 
